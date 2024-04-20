@@ -1,12 +1,17 @@
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+
 import "./nav.css";
 
-export default Nav = () => {
+const Nav = () => {
   return (
     <>
       <body>
         <header>
           <nav>
-            <img src="" alt="Hello World" className="logo" />
+            {/* <img src="" alt="Hello World" className="logo" /> */}
+            <p>Demo</p>
             <ul>
               <li>
                 <a href="#">Login</a>
@@ -19,11 +24,13 @@ export default Nav = () => {
               </li>
               <li className="search">
                 <a href="#">
-                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </a>
               </li>
-              <li>
-                <a href="#">Login</a>
+              <li className="hamburger">
+                <a href="#">
+                  <div className="bar"></div>
+                </a>
               </li>
             </ul>
           </nav>
@@ -32,3 +39,5 @@ export default Nav = () => {
     </>
   );
 };
+
+export default Nav;
