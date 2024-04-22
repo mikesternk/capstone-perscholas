@@ -6,7 +6,184 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+::selection {
+    background-color: #0b372dbb;
+}
+
 main {
-    background-color: #353;
+    position: relative;
     height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.parallax {
+    pointer-events: none;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.bg-img {
+    position: absolute;
+    z-index: 1;
+    width: 2800px;
+    top: calc(50% - 350px);
+    left: calc(50% - 20px);
+}
+
+.mountain-7 {
+    position: absolute;
+    z-index: 2;
+    width: 760px;
+    top: calc(50% + 200px);
+    left: calc(50% - 310px);
+}
+
+.fog-4 {
+    position: absolute;
+    z-index: 3;
+    width: 1300px;
+    top: calc(50% + 80px);
+    left: 50%;
+}
+
+.mountain-2 {
+    position: absolute;
+    z-index: 4;
+    width: 300px;
+    top: calc(50% + 70px);
+    left: calc(50% - 490px);
+}
+
+.mountain-0 {
+    position: absolute;
+    z-index: 5;
+    width: 400px;
+    top: calc(50% + 70px);
+    left: calc(50% + 170px);
+}
+
+.fog-3 {
+    position: absolute;
+    z-index: 6;
+    width: 1400px;
+    top: calc(50% + 150px);
+    left: calc(50% + 1px);
+}
+
+.mountain-1 {
+    position: absolute;
+    z-index: 7;
+    width: 480px;
+    top: calc(50% + 80px);
+    left: calc(50% - 70px);
+}
+
+.text {
+    position: absolute;
+    z-index: 8;
+    top: calc(50% - 100px);
+    left: calc(50% + 20px);
+    text-align: center;
+    text-transform: uppercase;
+    pointer-events: auto;
+    color: #fff;
+}
+
+.text h2 {
+    font-weight: 100;
+    font-size: 6.5rem;
+    line-height: 0.88;
+}
+
+.text h1 {
+    font-weight: 800;
+    font-size: 7.5rem;
+    line-height: 0.88;
+}
+
+.mountain-3 {
+    position: absolute;
+    z-index: 9;
+    width: 600px;
+    top: calc(50% + 80px);
+    left: calc(50% + 330px);
+}
+
+.mountain-6 {
+    position: absolute;
+    z-index: 10;
+    width: 400px;
+    top: calc(50% + 125px);
+    left: calc(50% + 450px);
+}
+
+.mountain-8 {
+    position: absolute;
+    z-index: 11;
+    width: 430px;
+    top: calc(50% + 125px);
+    left: calc(50% - 260px);
+}
+
+.fog-1 {
+    position: absolute;
+    z-index: 12;
+    width: 1400px;
+    top: calc(50% + 150px);
+    left: calc(50% + 10px);
+}
+
+.mountain-5 {
+    position: absolute;
+    z-index: 13;
+    width: 350px;
+    top: calc(50% + 250px);
+    left: calc(50% + 465px);
+}
+
+.mountain-4 {
+    position: absolute;
+    z-index: 14;
+    width: 330px;
+    top: calc(50% + 220px);
+    left: calc(50% + 175px);
+}
+
+.sun-ray {
+    position: absolute;
+    z-index: 15;
+    top: 0;
+    right: 0;
+    width: 585px;
+}
+
+.black-shadow {
+    position: absolute;
+    z-index: 16;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+
+}
+
+.fog-0 {
+    position: absolute;
+    z-index: 17;
+    width: 1600px;
+    top: calc(100% - 205px);
+    left: 50%;
+}
+
+.vignette {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(ellipse at center, rbga(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0/7))
 }

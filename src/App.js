@@ -3,7 +3,11 @@ import Landing from "./components/Landing/Landing.js";
 // import Nav from "./components/Nav/Nav.js";
 
 function App() {
-  return <Landing />;
+  return (
+    <div className="App">
+      <Landing />
+    </div>
+  );
 }
 
 export default App;

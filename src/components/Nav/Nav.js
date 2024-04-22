@@ -19,9 +19,6 @@ const Nav = () => {
               <li>
                 <a href="#">Sign up</a>
               </li>
-              <li>
-                <a href="#">Login</a>
-              </li>
               <li className="search">
                 <a href="#">
                   <FontAwesomeIcon icon={faMagnifyingGlass} />

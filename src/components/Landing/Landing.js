@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import Nav from "../Nav/Nav.js";
 
 //#region
@@ -23,35 +24,62 @@ import BlackShadow from "../../images/Black_Shadow.png";
 
 import "./landing.css";
 
+const useMousePosition = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const updateMousePosition = (e) => {
+    // Get the width and height of the window
+    const { innerWidth, innerHeight } = window;
+
+    // Calculate coordinates relative to center of window
+    const x = e.clientX - innerWidth / 2;
+    const y = e.clientY - innerHeight / 2;
+
+    // Update the position
+    setMousePosition({ x, y });
+  };
+
+  useEffect(() => {
+    window.addEventListener("mousemove", updateMousePosition);
+
+    return () => window.removeEventListener("mousemove", updateMousePosition);
+  }, []);
+  return mousePosition;
+};
+
 const Landing = () => {
+  const { x, y } = useMousePosition();
+  console.log(x, y);
   return (
     <>
-      <Nav />
-      <main>
-        <img src={Background} className="parallax bg-img" />
-        <img src={Mountain7} className="parallax mountain-7" />
-        <img src={Fog4} className="parallax fog-4" />
-        <img src={Mountain2} className="parallax mountain-2" />
-        <img src={Mountain0} className="parallax mountain-0" />
-        <img src={Fog3} className="parallax fog-3" />
-        <img src={Mountain1} className="parallax mountain-1" />
-        <div className="parallax text">
-          <h1>The Stick</h1>
-        </div>
-        <img src={Mountain3} className="parallax mountain-3" />
-        <img src={Fog2} className="parallax fog-2" />
-        <img src={Mountain8} className="parallax mountain-8" />
-        <img src={Mountain6} className="parallax mountain-6" />
-        <img src={Fog1} className="parallax fog-1" />
-        <img src={Mountain5} className="parallax mountain-5" />
-        <img src={Mountain4} className="parallax mountain-4" />
-        <img src={SunRays} className="sun-ray" />
-        <img src={BlackShadow} className="black-shadow" />
-        <img src={Fog0} className="parallax fog-0" />
-        <div className="parallax text">
-          <h2>Way of</h2>
-        </div>
-      </main>
+      <body>
+        <Nav />
+        <main>
+          <div className="vignette">
+            <img src={Background} className="parallax bg-img" alt="" />
+            <img src={Mountain7} className="parallax mountain-7" alt="" />
+            <img src={Fog4} className="parallax fog-4" alt="" />
+            <img src={Mountain2} className="parallax mountain-2" alt="" />
+            <img src={Mountain0} className="parallax mountain-0" alt="" />
+            <img src={Fog3} className="parallax fog-3" alt="" />
+            <img src={Mountain1} className="parallax mountain-1" alt="" />
+            <div className="parallax text">
+              <h2>Way of</h2>
+              <h1>The Stick</h1>
+            </div>
+            <img src={Mountain3} className="parallax mountain-3" alt="" />
+            <img src={Fog2} className="parallax fog-2" alt="" />
+            <img src={Mountain6} className="parallax mountain-6" alt="" />
+            <img src={Mountain8} className="parallax mountain-8" alt="" />
+            <img src={Fog1} className="parallax fog-1" alt="" />
+            <img src={Mountain5} className="parallax mountain-5" alt="" />
+            <img src={Mountain4} className="parallax mountain-4" alt="" />
+            <img src={SunRays} className="sun-ray" alt="" />
+            <img src={BlackShadow} className="black-shadow" alt="" />
+            <img src={Fog0} className="parallax fog-0" alt="" />
+          </div>
+        </main>
+      </body>
     </>
   );
 };
