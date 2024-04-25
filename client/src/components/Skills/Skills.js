@@ -177,7 +177,7 @@ const Skills = () => {
     <>
       <Navigation />
       <div className="container">
-        <h1>Fighting Game: Skill Point Allocation</h1>
+        <h1>Demo Fighting Game: Skill Point Allocation</h1>
         {/* Input field for character name */}
         <div className="character-input">
           <input

@@ -147,7 +147,6 @@ app.put("/characters/:id", async (req, res) => {
   const { name, skills, skillPoints } = req.body;
 
   try {
-    // Assume you're using a Mongoose model named "Character"
     const updatedCharacter = await Character.findByIdAndUpdate(
       id,
       { name, skills, skillPoints },

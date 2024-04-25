@@ -1,7 +1,5 @@
-/* Container for the entire skills page */
 body {
     background-color: #1a1a2e;
-
 }
 
 .container {
@@ -12,7 +10,6 @@ body {
     color: #ffffff;
 }
 
-/* Title for the skills page */
 .container h1 {
 
     text-align: center;
@@ -21,7 +18,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Input section for adding a new character */
 .character-input {
     display: flex;
     justify-content: center;
