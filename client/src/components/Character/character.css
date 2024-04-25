@@ -1,0 +1,70 @@
+.character-card {
+    background-color: #1a1a2e;
+    max-width: 300px;
+    color: #ffffff;
+    border: 2px solid #3f3f6f;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow for depth */
+    margin: 10px;
+    padding: 15px;
+    transition: all 0.3s ease;
+    /* Smooth transition for effects */
+}
+
+.character-card:hover {
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+    transform: scale(1.05);
+    /* Slightly increase size on hover */
+}
+
+.character-card h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid #3f3f6f;
+    /* Border under name for separation */
+    margin-bottom: 10px;
+}
+
+.skill {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.skill p {
+    font-size: 1.2rem;
+}
+
+.button {
+    background-color: #067406;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #004b00;
+}
+
+.reset,
+.delete {
+    text-align: center;
+}
+
+.reset .button,
+.delete .button {
+    background-color: #30475e;
+}
+
+.reset .button:hover {
+    background-color: #006ec9;
+}
+
+.delete .button:hover {
+    background-color: #d13450;
+}

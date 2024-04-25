@@ -1,12 +1,4 @@
-/* *,
-*::after,
-*::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-} */
-
-.login-container {
+.signup-container {
     position: relative;
     top: 50px;
     background-color: #333;
@@ -18,7 +10,7 @@
     text-align: center;
 }
 
-.login-container h2 {
+.signup-container h2 {
     font-size: 2rem;
     margin-bottom: 20px;
 }
@@ -42,7 +34,7 @@
     color: white;
 }
 
-.login-button {
+.signup-button {
     display: inline-block;
     background-color: #009688;
     color: white;
@@ -52,24 +44,24 @@
     transition: background-color 0.3s;
 }
 
-.login-button:hover {
+.signup-button:hover {
     background-color: #00796b;
 }
 
-.sign-up-redirect {
+.login-redirect {
     margin-top: 20px;
     font-size: 1rem;
 }
 
-.sign-up-redirect p {
+.login-redirect p {
     margin-bottom: 5px;
 }
 
-.sign-up-redirect a {
+.login-redirect a {
     text-decoration: none;
     color: #00bcd4;
 }
 
-.sign-up-redirect a:hover {
+.login-redirect a:hover {
     color: #0097a7;
 }
