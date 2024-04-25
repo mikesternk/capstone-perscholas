@@ -1,26 +1,37 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./skills.css";
 import CharacterCard from "../Character/Character.js";
 import Navigation from "../../components/Navigation/Navigation.js";
 
 const baseURL = "http://localhost:5000";
+
 const Skills = () => {
   const [characters, setCharacters] = useState([]);
   const [newCharacterName, setNewCharacterName] = useState("");
 
   useEffect(() => {
     // Fetch characters from the backend on startup
-    axios.get(`${baseURL}/characters`).then((res) => {
-      console.log("Characters", res.data);
-      setCharacters(res.data);
-    });
+    const fetchCharacters = async () => {
+      try {
+        const response = await fetch(`${baseURL}/characters`);
+        if (!response.ok) {
+          throw new Error(`Error fetching characters: ${response.statusText}`);
+        }
+        const data = await response.json();
+        console.log("Fetched data:", data); // Log the fetched data
+
+        setCharacters(data);
+      } catch (error) {
+        console.error("Fetch error:", error);
+      }
+    };
+
+    fetchCharacters();
   }, []);
 
-  const addCharacter = () => {
+  const addCharacter = async () => {
     if (newCharacterName.trim() === "") {
-      // Do not add a character without a valid name
-      return;
+      return; // Don't add a character without a valid name
     }
 
     const newCharacter = {
@@ -33,66 +44,133 @@ const Skills = () => {
       skillPoints: 10,
     };
 
-    // Save the new character to the backend
-    axios.post(`${baseURL}/characters`, newCharacter).then((res) => {
-      setCharacters([...characters, res.data]);
-    });
+    try {
+      const response = await fetch(`${baseURL}/characters`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newCharacter),
+      });
 
-    // Clear the input field after adding
-    setNewCharacterName("");
+      if (!response.ok) {
+        throw new Error(`Error adding character: ${response.statusText}`);
+      }
+
+      const addedCharacter = await response.json();
+      setCharacters([...characters, addedCharacter]);
+      console.log("Added character:", addedCharacter); // Log the added character
+
+      // Clear the input field after adding
+      setNewCharacterName("");
+    } catch (error) {
+      console.error("Error adding character:", error);
+    }
   };
 
-  const deleteCharacter = (characterId) => {
-    // Delete the character from the backend
-    axios.delete(`${baseURL}/characters/${characterId}`).then(() => {
+  const deleteCharacter = async (characterId) => {
+    try {
+      const response = await fetch(`${baseURL}/characters/${characterId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error deleting character: ${response.statusText}`);
+      }
+
       setCharacters(
-        characters.filter((character) => character.id !== characterId)
+        characters.filter((character) => character._id !== characterId)
       );
+    } catch (error) {
+      console.error("Error deleting character:", error);
+    }
+  };
+
+  const allocateSkillPoint = async (characterId, skill) => {
+    console.log("Allocating skill point for character ID:", characterId); // Check ID
+    console.log(skill);
+
+    if (characterId === undefined) {
+      console.error("Character ID is undefined"); // Report if ID is missing
+      return;
+    }
+
+    const updatedCharacters = characters.map((character) => {
+      if (character._id === characterId) {
+        // Check the ID
+        return {
+          ...character,
+          skills: {
+            ...character.skills,
+            [skill]: character.skills[skill] + 1,
+          },
+          skillPoints: character.skillPoints - 1,
+        };
+      }
+      return character;
     });
+
+    setCharacters(updatedCharacters); // Update state
+
+    try {
+      const updatedCharacter = updatedCharacters.find(
+        (c) => c._id === characterId
+      );
+
+      console.log("Updated character for PUT:", updatedCharacter); // Check the updated data
+
+      const response = await fetch(`${baseURL}/characters/${characterId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedCharacter),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error updating character: ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error("Error updating character:", error);
+    }
   };
 
-  const allocateSkillPoint = (characterId, skill) => {
-    setCharacters(
-      characters.map((character) => {
-        if (character.id === characterId) {
-          return {
-            ...character,
-            skills: {
-              [skill]: character.skills[skill] + 1,
-            },
-            skillPoints: character.skillPoints - 1,
-          };
-        }
-        return character;
-      })
-    );
+  const resetCharacter = async (characterId) => {
+    const updatedCharacters = characters.map((character) => {
+      if (character._id === characterId) {
+        return {
+          ...character,
+          skills: {
+            strength: 0,
+            defense: 0,
+            speed: 0,
+          },
+          skillPoints: 10,
+        };
+      }
+      return character;
+    });
 
-    // Update the character in the backend
-    const updatedCharacter = characters.find((c) => c.id === characterId);
-    axios.put(`${baseURL}/characters/${characterId}`, updatedCharacter);
-  };
+    setCharacters(updatedCharacters);
 
-  const resetCharacter = (characterId) => {
-    setCharacters(
-      characters.map((character) => {
-        if (character.id === characterId) {
-          return {
-            ...character,
-            skills: {
-              strength: 0,
-              defense: 0,
-              speed: 0,
-            },
-            skillPoints: 10,
-          };
-        }
-        return character;
-      })
-    );
+    try {
+      const updatedCharacter = updatedCharacters.find(
+        (c) => c._id === characterId
+      );
+      const response = await fetch(`${baseURL}/characters/${characterId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedCharacter),
+      });
 
-    // Update the character in the backend
-    const updatedCharacter = characters.find((c) => c.id === characterId);
-    axios.put(`${baseURL}/characters/${characterId}`, updatedCharacter);
+      if (!response.ok) {
+        throw new Error(`Error resetting character: ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error("Error resetting character:", error);
+    }
   };
 
   return (

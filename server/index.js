@@ -93,11 +93,11 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json({ limit: "30mb" }));
 
 // Allow cross-origin requests from the frontend
-const corsOptions = {
-  origin: "http://localhost:3000/skills", // Frontend origin
-  methods: "GET, POST, PUT, DELETE", // Allowed HTTP methods
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: "http://localhost:3000/", // Frontend origin
+//   methods: "GET, POST, PUT, DELETE", // Allowed HTTP methods
+// };
+app.use(cors());
 
 // app.use("/characters", characterRoutes);
 
@@ -143,14 +143,25 @@ app.delete("/characters/:id", async (req, res) => {
 
 // PUT update a character's skill points
 app.put("/characters/:id", async (req, res) => {
+  const { id } = req.params;
+  const { name, skills, skillPoints } = req.body;
+
   try {
-    const { id } = req.params;
-    const updatedCharacter = await Character.findByIdAndUpdate(id, req.body, {
-      new: true,
-    });
+    // Assume you're using a Mongoose model named "Character"
+    const updatedCharacter = await Character.findByIdAndUpdate(
+      id,
+      { name, skills, skillPoints },
+      { new: true }
+    );
+
+    if (!updatedCharacter) {
+      return res.status(404).json({ message: "Character not found." });
+    }
+
     res.json(updatedCharacter);
   } catch (error) {
-    res.status(500).json({ message: "Error updating character", error });
+    console.error("PUT error:", error);
+    res.status(500).json({ message: "Internal Server Error." });
   }
 });
 

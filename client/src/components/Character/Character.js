@@ -6,7 +6,7 @@ const CharacterCard = ({ character, onAllocate, onReset, onDelete }) => {
 
   const allocateSkillPoint = (skill) => {
     if (skillPoints > 0 && skills[skill] < 10) {
-      onAllocate(character.id, skill);
+      onAllocate(character._id, skill);
     }
   };
 
@@ -45,13 +45,13 @@ const CharacterCard = ({ character, onAllocate, onReset, onDelete }) => {
         </button>
       </div>
       <div className="reset">
-        <button className="button" onClick={() => onReset(character.id)}>
+        <button className="button" onClick={() => onReset(character._id)}>
           Reset
         </button>
       </div>
       {/* Delete button */}
       <div className="delete">
-        <button className="button" onClick={() => onDelete(character.id)}>
+        <button className="button" onClick={() => onDelete(character._id)}>
           Delete Character
         </button>
       </div>

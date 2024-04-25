@@ -7,13 +7,15 @@ import Skills from "./components/Skills/Skills.js";
 
 function App() {
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/skills" element={<Skills />} />
-      </Routes>
-    </div>
+    <>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/skills" element={<Skills />} />
+        </Routes>
+      </div>
+    </>
   );
 }
 
