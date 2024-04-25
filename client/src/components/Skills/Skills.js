@@ -4,14 +4,15 @@ import "./skills.css";
 import CharacterCard from "../Character/Character.js";
 import Navigation from "../../components/Navigation/Navigation.js";
 
-const port = 5000;
+const baseURL = "http://localhost:5000";
 const Skills = () => {
   const [characters, setCharacters] = useState([]);
   const [newCharacterName, setNewCharacterName] = useState("");
 
   useEffect(() => {
     // Fetch characters from the backend on startup
-    axios.get(`http://localhost:${port}/characters`).then((res) => {
+    axios.get(`${baseURL}/characters`).then((res) => {
+      console.log("Characters", res.data);
       setCharacters(res.data);
     });
   }, []);
@@ -33,11 +34,9 @@ const Skills = () => {
     };
 
     // Save the new character to the backend
-    axios
-      .post(`http://localhost:${port}/characters`, newCharacter)
-      .then((res) => {
-        setCharacters([...characters, res.data]);
-      });
+    axios.post(`${baseURL}/characters`, newCharacter).then((res) => {
+      setCharacters([...characters, res.data]);
+    });
 
     // Clear the input field after adding
     setNewCharacterName("");
@@ -45,13 +44,11 @@ const Skills = () => {
 
   const deleteCharacter = (characterId) => {
     // Delete the character from the backend
-    axios
-      .delete(`http://localhost:${port}/characters/${characterId}`)
-      .then(() => {
-        setCharacters(
-          characters.filter((character) => character.id !== characterId)
-        );
-      });
+    axios.delete(`${baseURL}/characters/${characterId}`).then(() => {
+      setCharacters(
+        characters.filter((character) => character.id !== characterId)
+      );
+    });
   };
 
   const allocateSkillPoint = (characterId, skill) => {
@@ -72,10 +69,7 @@ const Skills = () => {
 
     // Update the character in the backend
     const updatedCharacter = characters.find((c) => c.id === characterId);
-    axios.put(
-      `http://localhost:${port}/characters/${characterId}`,
-      updatedCharacter
-    );
+    axios.put(`${baseURL}/characters/${characterId}`, updatedCharacter);
   };
 
   const resetCharacter = (characterId) => {
@@ -98,10 +92,7 @@ const Skills = () => {
 
     // Update the character in the backend
     const updatedCharacter = characters.find((c) => c.id === characterId);
-    axios.put(
-      `http://localhost:${port}/characters/${characterId}`,
-      updatedCharacter
-    );
+    axios.put(`${baseURL}/characters/${characterId}`, updatedCharacter);
   };
 
   return (

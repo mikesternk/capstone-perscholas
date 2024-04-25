@@ -4,7 +4,7 @@
 // import cors from "cors";
 // import "dotenv/config";
 // import connectToDb from "./config/connectToDb.js";
-// // import Character from "./Models/Characters/Characters.js";
+// // import Character from "./models/Characters/Characters.js";
 
 // // Connect to MongoDB
 // // mongoose.connect("mongodb://localhost:27017/fighting_game", {});
@@ -74,27 +74,23 @@
 // });
 
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
 
-// MongoDB connection string
-const mongoUrl =
-  "mongodb+srv://mikesternk:mike2002@cluster0.vdnipvb.mongodb.net/fighting-game?retryWrites=true&w=majority&appName=Cluster0";
+import connectToDb from "./config/connectToDb.js";
+import Character from "./models/characters/characters.js";
+// import characterRoutes from "./routes/characters.js";
 
 // Connect to MongoDB
-mongoose
-  .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((error) => console.error("Error connecting to MongoDB:", error));
+connectToDb();
 
 // Create Express app
 const app = express();
 
 // Port for the backend server
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Middleware for parsing JSON requests
-app.use(express.json());
+app.use(express.json({ limit: "30mb" }));
 
 // Allow cross-origin requests from the frontend
 const corsOptions = {
@@ -103,18 +99,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Define the character schema and model
-const characterSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  skillPoints: { type: Number, required: true },
-  skills: {
-    strength: { type: Number, required: true },
-    defense: { type: Number, required: true },
-    speed: { type: Number, required: true },
-  },
-});
-
-const Character = mongoose.model("Character", characterSchema);
+// app.use("/characters", characterRoutes);
 
 // GET all characters
 app.get("/characters", async (req, res) => {
