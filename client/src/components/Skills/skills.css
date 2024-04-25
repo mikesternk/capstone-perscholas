@@ -1,0 +1,99 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    background: lightslategray;
+}
+
+.container {
+    position: relative;
+    top: 70px;
+}
+
+.character-list {
+    display: grid;
+    grid-template-columns: repeat(3, 20fr);
+    grid-gap: 10px;
+}
+
+.character-card {
+    width: 300px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+    position: relative;
+    /* To align the delete button */
+}
+
+.delete {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.reset,
+.delete {
+    text-align: center;
+}
+
+.button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+.button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.button.delete {
+    background-color: #f44336;
+    /* Red for delete */
+}
+
+.button.delete:hover {
+    background-color: #e53935;
+    /* Darker red on hover */
+}
+
+
+.character-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.character-input input {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.character-input button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.character-input button:hover {
+    background-color: #45a049;
+}

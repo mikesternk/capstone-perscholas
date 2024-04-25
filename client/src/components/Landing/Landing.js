@@ -35,27 +35,37 @@ const useMousePosition = () => {
     // Calculate coordinates relative to center of window
     let x = e.clientX - innerWidth / 2;
     let y = e.clientY - innerHeight / 2;
+    let rotateDegree = 0;
+
+    rotateDegree = (x / (window.innerWidth / 2)) * 20;
 
     // Update the position
     setMousePosition({ x, y });
+    function update() {
+      parallaxEl.forEach((el) => {
+        let speedX = el.dataset.speedx;
+        let speedY = el.dataset.speedy;
+        let speedZ = el.dataset.speedz;
+        let rotateSpeed = el.dataset.rotation;
 
-    parallaxEl.forEach((el) => {
-      let speedX = el.dataset.speedx;
-      let speedY = el.dataset.speedy;
-      let speedZ = el.dataset.speedz;
+        let isInLeft =
+          parseFloat(getComputedStyle(el).left) < window.innerWidth / 2
+            ? 1
+            : -1;
 
-      let isInLeft =
-        parseFloat(getComputedStyle(el).left) < window.innerWidth / 2 ? 1 : -1;
+        let z =
+          (e.clientX - parseFloat(getComputedStyle(el).left)) * isInLeft * 0.1;
 
-      let z =
-        (e.clientX - parseFloat(getComputedStyle(el).left)) * isInLeft * 0.1;
-
-      el.style.transform = `translateX(calc(-50% + ${
-        -x * speedX
-      }px)) translateY(calc(-50% + ${
-        y * speedY
-      }px)) perspective(2300px) translateZ(${z * speedZ}px)`;
-    });
+        el.style.transform = `translateX(calc(-50% + ${
+          -x * speedX
+        }px)) translateY(calc(-50% + ${
+          y * speedY
+        }px)) perspective(2300px) translateZ(${z * speedZ}px) rotateY(${
+          rotateDegree * rotateSpeed
+        }deg)`;
+      });
+    }
+    update();
   };
 
   useEffect(() => {
@@ -115,9 +125,9 @@ const Landing = () => {
             <img
               src={Mountain0}
               data-speedx="0.07"
-              data-speedy="0.11"
-              data-speedz="0.4"
-              data-rotation="0.04"
+              data-speedy="0.07"
+              data-speedz="0.58"
+              data-rotation="0.00"
               className="parallax mountain-0"
               alt=""
             />

@@ -40,6 +40,15 @@ nav {
     align-items: center;
 }
 
+nav p {
+    cursor: pointer;
+    transition: 1s ease-in-out;
+}
+
+nav p:hover {
+    color: red;
+}
+
 header ul {
     display: flex;
     align-items: center;
@@ -53,18 +62,19 @@ header ul a {
     text-transform: uppercase;
     font-weight: 300;
     font-size: 0.83rem;
+    transition: 1s;
 }
 
-.search a {
-    font-size: 1.05rem;
-    padding: 0 3rem;
+header ul a:hover {
+    color: red;
+    font-weight: 400;
 }
 
 .hamburger {
     padding-left: 1.5rem
 }
 
-.hamburger a {
+.hamburger {
     padding: 0;
     width: 37px;
     height: 37px;
@@ -75,6 +85,7 @@ header ul a {
     background-color: rgba(115, 115, 115, 0.5);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    cursor: pointer;
 }
 
 .hamburger .bar {
@@ -103,4 +114,60 @@ header ul a {
 
 .hamburger .bar::after {
     top: 4.5px;
+}
+
+.dropdown-menu #menu-icon {
+    padding: 5px;
+    border: none;
+    color: white;
+    font-size: 30px;
+    z-index: 999;
+    cursor: pointer;
+    padding: 0px 15px;
+    /* display: none; */
+}
+
+.dropdown-menu #menu-icon:hover {
+    color: #fffb;
+
+    transform: translateX(50%);
+    transition: transform .5s ease-in-out;
+}
+
+.dropdown-menu #menu-icon:active {
+    color: #fffb;
+    font-size: 40px;
+
+    transform: translateX(50%);
+    transition: all .5s ease;
+}
+
+.dropdown-menu a {
+    display: block;
+    color: white;
+    font-size: 0.83em;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.dropdown-menu .content {
+    top: 35px;
+    display: none;
+    background-color: #fff3;
+    position: absolute;
+    min-width: 200px;
+    right: 0;
+    border-radius: 5%/5%;
+
+    /* box-shadow: horizontal-position, vertical-position, blur, color */
+    box-shadow: 2px 2px 7px black;
+}
+
+.dropdown-menu:hover .content {
+    display: block;
+}
+
+.dropdown-menu a:hover {
+    background-color: #fff7;
+    border-radius: 5%/5%;
 }

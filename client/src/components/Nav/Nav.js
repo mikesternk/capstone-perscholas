@@ -14,21 +14,23 @@ const Nav = () => {
             <p>Demo</p>
             <ul>
               <li>
-                <a href="#">Login</a>
+                <a href="login">Login</a>
               </li>
               <li>
-                <a href="#">Sign up</a>
+                <a href="signUp">Sign up</a>
               </li>
               <li className="search">
-                <a href="#">
+                <a href="skills">
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </a>
               </li>
-              <li className="hamburger">
-                <a href="#">
-                  <div className="bar"></div>
-                </a>
-              </li>
+              {/* <li className="dropdown-menu hamburger">
+                <div className="bar"></div>
+                <div className="content">
+                  <a href="/settings">Settings</a>
+                  <a href="/">Logout</a>
+                </div>
+              </li> */}
             </ul>
           </nav>
         </header>
